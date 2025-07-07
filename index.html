@@ -1,12 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shel | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shubham | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: black;
+      overflow-x: hidden;
+    }
+    .glass-button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    .skill-pill {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #f3f4f6;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    }
+    #cometCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+  </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; padding: 100px;">
-  <h1>Hello, I’m Shel 👋</h1>
-  <p>This is my developer portfolio — currently under construction 🚧</p>
+<body class="text-gray-300">
+<canvas id="cometCanvas"></canvas>
+
+<header class="w-full p-6 flex justify-center items-center border-b border-gray-700">
+  <h1 class="text-2xl font-bold">Shubham</h1>
+</header>
+
+<main class="container mx-auto px-6 py-16">
+  <!-- About Section -->
+  <section class="mb-20">
+    <h2 class="text-2xl font-semibold text-center mb-6">About</h2>
+    <div class="flex justify-center">
+      <div class="glass-button rounded-lg px-6 py-3 text-xl flex items-center gap-2 project-btn" data-target="aboutContent">
+        💡 Know Me
+      </div>
+    </div>
+    <div id="aboutContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 text-center text-gray-300">
+        <p class="text-lg">
+          I'm <strong>Shubham</strong>, currently pursuing my Bachelor's from <strong>IIT Guwahati</strong> in Data Science and Artificial Intelligence. Passionate about exploring the magic of machine learning, I love turning raw data into real insight and crafting models that think. Always curious, always building.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ML Projects Section -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold text-center mb-6">Projects</h2>
+    <div class="flex justify-center space-x-4">
+      <div class="glass-button rounded-lg px-6 py-3 text-xl flex items-center gap-2 project-btn" data-target="mlContent">
+        🤖 Machine Learning
+      </div>
+      <div class="glass-button rounded-lg px-6 py-3 text-xl flex items-center gap-2 project-btn" data-target="dlContent">
+        🧠 Deep Learning
+      </div>
+      <div class="glass-button rounded-lg px-6 py-3 text-xl flex items-center gap-2 project-btn" data-target="aiContent">
+        🧬 AI
+      </div>
+    </div>
+    <div id="mlContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
+  <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6">
+    <ul class="list-disc list-inside space-y-3">
+      <li>
+        <a href="https://github.com/Shubham04-oss/Student-performance-regression" target="_blank" class="hover:underline text-white">Student Performance Regression</a>
+      </li>
+      <li>
+        <a href="https://github.com/Shubham04-oss/Medical-Cost-Prediction" target="_blank" class="hover:underline text-white">Medical Cost Prediction</a>
+      </li>
+    </ul>
+  </div>
+</div>
+    <div id="dlContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
+  <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6">
+    <p class="text-center text-gray-400">Coming soon...</p>
+  </div>
+</div>
+    <div id="aiContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
+  <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6">
+    <p class="text-center text-gray-400">Coming soon...</p>
+  </div>
+</div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold text-center mb-6">Skills</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <span class="skill-pill px-4 py-2 rounded-full">Python</span>
+      <span class="skill-pill px-4 py-2 rounded-full">C</span>
+      <span class="skill-pill px-4 py-2 rounded-full">EDA</span>
+      <span class="skill-pill px-4 py-2 rounded-full">Data Analysis</span>
+      <span class="skill-pill px-4 py-2 rounded-full">Excel</span>
+      <span class="skill-pill px-4 py-2 rounded-full">SQL</span>
+    </div>
+  </section>
+</main>
+
+<!-- Contact Section -->
+<section id="contact" class="bg-white/10 backdrop-blur-md border-t border-white/20 py-12">
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-2xl font-semibold mb-4">📫 Get in touch</h2>
+    <div class="flex justify-center space-x-8">
+      <a href="https://github.com/Shubham04-oss" target="_blank" class="hover:text-white text-xl">GitHub</a>
+      <a href="https://linkedin.com/in/shubham-tanwar04" target="_blank" class="hover:text-white text-xl">LinkedIn</a>
+      <a href="https://instagram.com/braindead.shel" target="_blank" class="hover:text-white text-xl">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<footer class="text-center text-gray-500 py-6">© 2025 Shubham</footer>
+
+<script>
+  const sections = ['mlContent', 'dlContent', 'aiContent', 'aboutContent'];
+  document.querySelectorAll('.project-btn').forEach(btn => {
+    const target = btn.getAttribute('data-target');
+    btn.addEventListener('mouseenter', () => {
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.style.maxHeight = id === target ? el.scrollHeight + 'px' : '0px';
+        }
+      });
+    });
+  });
+
+  const canvas = document.getElementById("cometCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let mouseX = canvas.width / 2;
+  let mouseY = canvas.height / 2;
+
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  const stars = Array.from({ length: 300 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 2,
+    alpha: Math.random(),
+    dx: (Math.random() - 0.5) * 0.5,
+    dy: (Math.random() - 0.5) * 0.5,
+    color: 'rgba(255, 255, 255, 0.8)'
+  }));
+
+  function drawNebula() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(star => {
+      const dx = mouseX - star.x;
+      const dy = mouseY - star.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const attraction = Math.max(0, 100 - dist) / 300;
+      star.x += star.dx + (dx / dist) * attraction;
+      star.y += star.dy + (dy / dist) * attraction;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fillStyle = star.color;
+      ctx.globalAlpha = star.alpha;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  function spawnNebula() {
+    for (let i = 0; i < 30; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 3,
+        alpha: 0.5 + Math.random() * 0.5,
+        dx: (Math.random() - 0.5) * 0.4,
+        dy: (Math.random() - 0.5) * 0.4,
+        color: 'rgba(255, 255, 255, 0.6)'
+      });
+    }
+  }
+
+  setInterval(spawnNebula, 5000);
+
+  function animate() {
+    drawNebula();
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
 </body>
 </html>
