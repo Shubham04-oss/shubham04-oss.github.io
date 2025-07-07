@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Shubham | Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,10 +12,7 @@
       font-family: 'Inter', sans-serif;
       background: black;
       overflow-x: hidden;
-      user-select: none; /* Prevent text selection */
-      -webkit-user-select: none; /* Safari */
-      -moz-user-select: none; /* Firefox */
-      -ms-user-select: none; /* IE/Edge */
+      overscroll-behavior: none; /* Prevent pull-to-refresh issues */
     }
     .glass-button {
       background: rgba(255, 255, 255, 0.1);
@@ -23,14 +20,14 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
       transition: background 0.3s, transform 0.2s;
-      touch-action: manipulation; /* Improve touch responsiveness */
+      touch-action: manipulation;
     }
     .glass-button:hover {
       background: rgba(255, 255, 255, 0.2);
       transform: translateY(-2px);
     }
     .glass-button.active {
-      background: rgba(255, 255, 255, 0.3); /* Highlight active button */
+      background: rgba(255, 255, 255, 0.3);
     }
     .skill-pill {
       background: rgba(255, 255, 255, 0.1);
@@ -39,10 +36,10 @@
       box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
-      gap: 0.5rem; /* Space between emoji and text */
+      gap: 0.5rem;
     }
     .skill-emoji {
-      font-size: 1rem; /* Adjust emoji size */
+      font-size: 0.875rem;
     }
     #cometCanvas {
       position: fixed;
@@ -51,26 +48,30 @@
       width: 100vw;
       height: 100vh;
       z-index: -1;
+      touch-action: none; /* Prevent canvas from interfering with scroll */
     }
     /* Responsive adjustments */
     @media (max-width: 640px) {
       .glass-button {
         padding: 0.5rem 1rem;
-        font-size: 1rem;
-      }
-      .skill-pill {
-        padding: 0.5rem 1rem;
         font-size: 0.875rem;
       }
+      .skill-pill {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+      }
       .skill-emoji {
-        font-size: 0.875rem; /* Smaller emoji on mobile */
+        font-size: 0.75rem;
       }
       h1, h2 {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
       }
       .container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      section {
+        margin-bottom: 2rem;
       }
     }
   </style>
@@ -78,22 +79,22 @@
 <body class="text-gray-300">
 <canvas id="cometCanvas"></canvas>
 
-<header class="w-full p-4 sm:p-6 flex justify-center items-center border-b border-gray-700">
-  <h1 class="text-xl sm:text-2xl font-bold">Shubham</h1>
+<header class="w-full p-3 sm:p-6 flex justify-center items-center border-b border-gray-700">
+  <h1 class="text-lg sm:text-2xl font-bold">Shubham</h1>
 </header>
 
-<main class="container mx-auto px-4 sm:px-6 py-8 sm:py-16">
+<main class="container mx-auto px-4 sm:px-6 py-6 sm:py-12">
   <!-- About Section -->
-  <section class="mb-12 sm:mb-20" aria-labelledby="about-heading">
-    <h2 id="about-heading" class="text-xl sm:text-2xl font-semibold text-center mb-6">About</h2>
+  <section class="mb-8 sm:mb-12" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="text-lg sm:text-2xl font-semibold text-center mb-4">About</h2>
     <div class="flex justify-center">
-      <button class="glass-button rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl flex items-center gap-2 project-btn" data-target="aboutContent" aria-expanded="false" aria-controls="aboutContent">
+      <button class="glass-button rounded-lg px-3 sm:px-6 py-2 sm:py-3 text-base sm:text-xl flex items-center gap-2 project-btn" data-target="aboutContent" aria-expanded="false" aria-controls="aboutContent">
         💡 Know Me
       </button>
     </div>
-    <div id="aboutContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
-      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 sm:p-6 text-center text-gray-300">
-        <p class="text-base sm:text-lg">
+    <div id="aboutContent" class="overflow-hidden max-h-0 transition-all duration-500 mt-4">
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-3 sm:p-6 text-center text-gray-300">
+        <p class="text-sm sm:text-lg">
           I'm <strong>Shubham</strong>, currently pursuing my Bachelor's from <strong>IIT Guwahati</strong> in Data Science and Artificial Intelligence. Passionate about exploring the magic of machine learning, I love turning raw data into real insight and crafting models that think. Always curious, always building.
         </p>
       </div>
@@ -101,22 +102,22 @@
   </section>
 
   <!-- ML Projects Section -->
-  <section class="mb-12 sm:mb-16" aria-labelledby="projects-heading">
-    <h2 id="projects-heading" class="text-xl sm:text-2xl font-semibold text-center mb-6">Projects</h2>
-    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-      <button class="glass-button rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl flex items-center gap-2 project-btn" data-target="mlContent" aria-expanded="false" aria-controls="mlContent">
+  <section class="mb-8 sm:mb-12" aria-labelledby="projects-heading">
+    <h2 id="projects-heading" class="text-lg sm:text-2xl font-semibold text-center mb-4">Projects</h2>
+    <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-3">
+      <button class="glass-button rounded-lg px-3 sm:px-6 py-2 sm:py-3 text-base sm:text-xl flex items-center gap-2 project-btn" data-target="mlContent" aria-expanded="false" aria-controls="mlContent">
         🤖 Machine Learning
       </button>
-      <button class="glass-button rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl flex items-center gap-2 project-btn" data-target="dlContent" aria-expanded="false" aria-controls="dlContent">
+      <button class="glass-button rounded-lg px-3 sm:px-6 py-2 sm:py-3 text-base sm:text-xl flex items-center gap-2 project-btn" data-target="dlContent" aria-expanded="false" aria-controls="dlContent">
         🧠 Deep Learning
       </button>
-      <button class="glass-button rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl flex items-center gap-2 project-btn" data-target="aiContent" aria-expanded="false" aria-controls="aiContent">
+      <button class="glass-button rounded-lg px-3 sm:px-6 py-2 sm:py-3 text-base sm:text-xl flex items-center gap-2 project-btn" data-target="aiContent" aria-expanded="false" aria-controls="aiContent">
         🧬 AI
       </button>
     </div>
-    <div id="mlContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
-      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 sm:p-6">
-        <ul class="list-disc list-inside space-y-3">
+    <div id="mlContent" class="overflow-hidden max-h-0 transition-all duration-500 mt-4">
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-3 sm:p-6">
+        <ul class="list-disc list-inside space-y-2">
           <li>
             <a href="https://github.com/Shubham04-oss/Student-performance-regression" target="_blank" class="hover:underline text-white">Student Performance Regression</a>
           </li>
@@ -126,51 +127,51 @@
         </ul>
       </div>
     </div>
-    <div id="dlContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
-      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 sm:p-6">
+    <div id="dlContent" class="overflow-hidden max-h-0 transition-all duration-500 mt-4">
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-3 sm:p-6">
         <p class="text-center text-gray-400">Coming soon...</p>
       </div>
     </div>
-    <div id="aiContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
-      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 sm:p-6">
+    <div id="aiContent" class="overflow-hidden max-h-0 transition-all duration-500 mt-4">
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-3 sm:p-6">
         <p class="text-center text-gray-400">Coming soon...</p>
       </div>
     </div>
   </section>
 
   <!-- Skills Section -->
-  <section class="mb-12 sm:mb-16" aria-labelledby="skills-heading">
-    <h2 id="skills-heading" class="text-xl sm:text-2xl font-semibold text-center mb-6">Skills</h2>
-    <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
-      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🐍</span> Python</span>
-      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🖥️</span> C</span>
-      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">📊</span> EDA</span>
-      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🔍</span> Data Analysis</span>
-      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">📈</span> Excel</span>
-      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🗄️</span> SQL</span>
+  <section class="mb-8 sm:mb-12" aria-labelledby="skills-heading">
+    <h2 id="skills-heading" class="text-lg sm:text-2xl font-semibold text-center mb-4">Skills</h2>
+    <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
+      <span class="skill-pill px-2 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🐍</span> Python</span>
+      <span class="skill-pill px-2 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🖥️</span> C</span>
+      <span class="skill-pill px-2 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">📊</span> EDA</span>
+      <span class="skill-pill px-2 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🔍</span> Data Analysis</span>
+      <span class="skill-pill px-2 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">📈</span> Excel</span>
+      <span class="skill-pill px-2 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🗄️</span> SQL</span>
     </div>
   </section>
 </main>
 
 <!-- Contact Section -->
-<section id="contact" class="bg-white/10 backdrop-blur-md border-t border-white/20 py-8 sm:py-12" aria-labelledby="contact-heading">
+<section id="contact" class="bg-white/10 backdrop-blur-md border-t border-white/20 py-6 sm:py-12" aria-labelledby="contact-heading">
   <div class="container mx-auto px-4 sm:px-6 text-center">
-    <h2 id="contact-heading" class="text-xl sm:text-2xl font-semibold mb-4">📫 Get in touch</h2>
-    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8">
-      <a href="https://github.com/Shubham04-oss pastbin.com" target="_blank" class="hover:text-white text-lg sm:text-xl">GitHub</a>
-      <a href="https://linkedin.com/in/shubham-tanwar04" target="_blank" class="hover:text-white text-lg sm:text-xl">LinkedIn</a>
-      <a href="https://instagram.com/braindead.shel" target="_blank" class="33hover:text-white text-lg sm:text-xl">Instagram</a>
+    <h2 id="contact-heading" class="text-lg sm:text-2xl font-semibold mb-3">📫 Get in touch</h2>
+    <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-6">
+      <a href="https://github.com/Shubham04-oss" target="_blank" class="hover:text-white text-base sm:text-xl">GitHub</a>
+      <a href="https://linkedin.com/in/shubham-tanwar04" target="_blank" class="hover:text-white text-base sm:text-xl">LinkedIn</a>
+      <a href="https://instagram.com/braindead.shel" target="_blank" class="hover:text-white text-base sm:text-xl">Instagram</a>
     </div>
   </div>
 </section>
 
-<footer class="text-center text-gray-500 py-4 sm:py-6">© 2025 Shubham</footer>
+<footer class="text-center text-gray-500 py-3 sm:py-6">© 2025 Shubham</footer>
 
 <script>
   // Handle collapsible sections with auto expand and auto collapse
   const sections = ['mlContent', 'dlContent', 'aiContent', 'aboutContent'];
   let collapseTimeout = null;
-  const AUTO_COLLAPSE_DELAY = 3000; // 3 seconds
+  const AUTO_COLLAPSE_DELAY = 3000;
 
   function collapseSection(targetId) {
     const el = document.getElementById(targetId);
@@ -178,7 +179,7 @@
     if (el && btn) {
       el.style.maxHeight = '0px';
       btn.setAttribute('aria-expanded', 'false');
-      btn.classList.remove('active'); // Remove active class
+      btn.classList.remove('active');
     }
   }
 
@@ -190,18 +191,18 @@
         if (id === targetId) {
           el.style.maxHeight = el.scrollHeight + 'px';
           btn.setAttribute('aria-expanded', 'true');
-          btn.classList.add('active'); // Add active class
+          btn.classList.add('active');
         } else {
           el.style.maxHeight = '0px';
           btn.setAttribute('aria-expanded', 'false');
-          btn.classList.remove('active'); // Remove active class
+          btn.classList.remove('active');
         }
       }
     });
   }
 
   function startAutoCollapse(targetId) {
-    clearTimeout(collapseTimeout); // Clear any existing timeout
+    clearTimeout(collapseTimeout);
     collapseTimeout = setTimeout(() => collapseSection(targetId), AUTO_COLLAPSE_DELAY);
   }
 
@@ -209,18 +210,16 @@
     const target = btn.getAttribute('data-target');
     const targetSection = document.getElementById(target);
 
-    // Expand on hover/touchstart
     btn.addEventListener('mouseenter', () => {
       clearTimeout(collapseTimeout);
       expandSection(target);
     });
     btn.addEventListener('touchstart', (e) => {
-      e.preventDefault(); // Prevent default touch behavior
+      e.preventDefault();
       clearTimeout(collapseTimeout);
       expandSection(target);
     }, { passive: false });
 
-    // Start auto-collapse on mouseleave/touchend
     btn.addEventListener('mouseleave', () => {
       if (targetSection.style.maxHeight !== '0px') {
         startAutoCollapse(target);
@@ -232,11 +231,9 @@
       }
     }, { passive: true });
 
-    // Pause auto-collapse on section interaction
     targetSection.addEventListener('mouseenter', () => clearTimeout(collapseTimeout));
     targetSection.addEventListener('touchstart', () => clearTimeout(collapseTimeout), { passive: true });
 
-    // Click/tap to toggle section
     btn.addEventListener('click', () => {
       clearTimeout(collapseTimeout);
       const isExpanded = targetSection.style.maxHeight !== '0px';
@@ -252,7 +249,6 @@
   const canvas = document.getElementById("cometCanvas");
   const ctx = canvas.getContext("2d");
 
-  // Resize canvas on window resize
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -260,33 +256,29 @@
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
-  // Mouse/touch position
   let mouseX = canvas.width / 2;
   let mouseY = canvas.height / 2;
 
-  // Update position for mouse and touch
   window.addEventListener('mousemove', e => {
     mouseX = e.clientX;
     mouseY = e.clientY;
   });
-  window.addEventListener('touchmove', e => {
-    e.preventDefault(); // Prevent scrolling
+  canvas.addEventListener('touchmove', e => {
     const touch = e.touches[0];
     mouseX = touch.clientX;
     mouseY = touch.clientY;
-  }, { passive: false });
+  }, { passive: true });
 
-  // Optimize star count for mobile
   const isMobile = window.innerWidth <= 640;
-  const starCount = isMobile ? 100 : 300; // Fewer stars on mobile
+  const starCount = isMobile ? 50 : 200;
   const stars = Array.from({ length: starCount }, () => ({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    radius: Math.random() * 2,
-    alpha: Math.random(),
-    dx: (Math.random() - 0.5) * 0.5,
-    dy: (Math.random() - 0.5) * 0.5,
-    color: 'rgba(255, 255, 255, 0.8)'
+    radius: Math.random() * 1.5,
+    alpha: Math.random() * 0.7 + 0.3,
+    dx: (Math.random() - 0.5) * 0.3,
+    dy: (Math.random() - 0.5) * 0.3,
+    color: 'rgba(255, 255, 255, 0.7)'
   }));
 
   function drawNebula() {
@@ -294,11 +286,10 @@
     stars.forEach(star => {
       const dx = mouseX - star.x;
       const dy = mouseY - star.y;
-      const dist = Math.sqrt(dx * dx + dy * dy) || 1; // Avoid division by zero
-      const attraction = Math.max(0, 100 - dist) / (isMobile ? 600 : 300); // Weaker attraction on mobile
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      const attraction = Math.max(0, 80 - dist) / (isMobile ? 800 : 400);
       star.x += star.dx + (dx / dist) * attraction;
       star.y += star.dy + (dy / dist) * attraction;
-      3// Keep stars within canvas bounds
       star.x = Math.max(0, Math.min(canvas.width, star.x));
       star.y = Math.max(0, Math.min(canvas.height, star.y));
       ctx.beginPath();
@@ -311,25 +302,24 @@
   }
 
   function spawnNebula() {
-    const newStarCount = isMobile ? 10 : 30; // Fewer new stars on mobile
+    const newStarCount = isMobile ? 5 : 20;
     for (let i = 0; i < newStarCount; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 3,
-        alpha: 0.5 + Math.random() * 0.5,
-        dx: (Math.random() - 0.5) * 0.4,
-        dy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2,
+        alpha: 0.4 + Math.random() * 0.4,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: (Math.random() - 0.5) * 0.3,
         color: 'rgba(255, 255, 255, 0.6)'
       });
     }
-    // Limit total stars to prevent performance issues
-    if (stars.length > (isMobile ? 150 : 400)) {
-      stars.splice(0, stars.length - (isMobile ? 150 : 400));
+    if (stars.length > (isMobile ? 100 : 300)) {
+      stars.splice(0, stars.length - (isMobile ? 100 : 300));
     }
   }
 
-  setInterval(spawnNebula, 5000);
+  setInterval(spawnNebula, 6000);
 
   function animate() {
     drawNebula();
