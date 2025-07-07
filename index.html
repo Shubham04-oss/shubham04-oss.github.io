@@ -12,6 +12,10 @@
       font-family: 'Inter', sans-serif;
       background: black;
       overflow-x: hidden;
+      user-select: none; /* Prevent text selection */
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE/Edge */
     }
     .glass-button {
       background: rgba(255, 255, 255, 0.1);
@@ -19,16 +23,26 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
       transition: background 0.3s, transform 0.2s;
+      touch-action: manipulation; /* Improve touch responsiveness */
     }
     .glass-button:hover {
       background: rgba(255, 255, 255, 0.2);
       transform: translateY(-2px);
+    }
+    .glass-button.active {
+      background: rgba(255, 255, 255, 0.3); /* Highlight active button */
     }
     .skill-pill {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.3);
       color: #f3f4f6;
       box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; /* Space between emoji and text */
+    }
+    .skill-emoji {
+      font-size: 1rem; /* Adjust emoji size */
     }
     #cometCanvas {
       position: fixed;
@@ -38,27 +52,48 @@
       height: 100vh;
       z-index: -1;
     }
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .glass-button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+      }
+      .skill-pill {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+      }
+      .skill-emoji {
+        font-size: 0.875rem; /* Smaller emoji on mobile */
+      }
+      h1, h2 {
+        font-size: 1.5rem;
+      }
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
   </style>
 </head>
 <body class="text-gray-300">
 <canvas id="cometCanvas"></canvas>
 
-<header class="w-full p-6 flex justify-center items-center border-b border-gray-700">
-  <h1 class="text-2xl font-bold">Shubham</h1>
+<header class="w-full p-4 sm:p-6 flex justify-center items-center border-b border-gray-700">
+  <h1 class="text-xl sm:text-2xl font-bold">Shubham</h1>
 </header>
 
-<main class="container mx-auto px-6 py-16">
+<main class="container mx-auto px-4 sm:px-6 py-8 sm:py-16">
   <!-- About Section -->
-  <section class="mb-20">
-    <h2 class="text-2xl font-semibold text-center mb-6">About</h2>
+  <section class="mb-12 sm:mb-20" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="text-xl sm:text-2xl font-semibold text-center mb-6">About</h2>
     <div class="flex justify-center">
-      <div class="glass-button rounded-lg px-6 py-3 text-xl flex items-center gap-2 project-btn" data-target="aboutContent">
+      <button class="glass-button rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl flex items-center gap-2 project-btn" data-target="aboutContent" aria-expanded="false" aria-controls="aboutContent">
         💡 Know Me
-      </div>
+      </button>
     </div>
     <div id="aboutContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
-      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 text-center text-gray-300">
-        <p class="text-lg">
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 sm:p-6 text-center text-gray-300">
+        <p class="text-base sm:text-lg">
           I'm <strong>Shubham</strong>, currently pursuing my Bachelor's from <strong>IIT Guwahati</strong> in Data Science and Artificial Intelligence. Passionate about exploring the magic of machine learning, I love turning raw data into real insight and crafting models that think. Always curious, always building.
         </p>
       </div>
@@ -66,98 +101,186 @@
   </section>
 
   <!-- ML Projects Section -->
-  <section class="mb-16">
-    <h2 class="text-2xl font-semibold text-center mb-6">Projects</h2>
-    <div class="flex justify-center space-x-4">
-      <div class="glass-button rounded-lg px-6 py-3 text-xl flex items-center gap-2 project-btn" data-target="mlContent">
+  <section class="mb-12 sm:mb-16" aria-labelledby="projects-heading">
+    <h2 id="projects-heading" class="text-xl sm:text-2xl font-semibold text-center mb-6">Projects</h2>
+    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+      <button class="glass-button rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl flex items-center gap-2 project-btn" data-target="mlContent" aria-expanded="false" aria-controls="mlContent">
         🤖 Machine Learning
-      </div>
-      <div class="glass-button rounded-lg px-6 py-3 text-xl flex items-center gap-2 project-btn" data-target="dlContent">
+      </button>
+      <button class="glass-button rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl flex items-center gap-2 project-btn" data-target="dlContent" aria-expanded="false" aria-controls="dlContent">
         🧠 Deep Learning
-      </div>
-      <div class="glass-button rounded-lg px-6 py-3 text-xl flex items-center gap-2 project-btn" data-target="aiContent">
+      </button>
+      <button class="glass-button rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-lg sm:text-xl flex items-center gap-2 project-btn" data-target="aiContent" aria-expanded="false" aria-controls="aiContent">
         🧬 AI
-      </div>
+      </button>
     </div>
     <div id="mlContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
-  <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6">
-    <ul class="list-disc list-inside space-y-3">
-      <li>
-        <a href="https://github.com/Shubham04-oss/Student-performance-regression" target="_blank" class="hover:underline text-white">Student Performance Regression</a>
-      </li>
-      <li>
-        <a href="https://github.com/Shubham04-oss/Medical-Cost-Prediction" target="_blank" class="hover:underline text-white">Medical Cost Prediction</a>
-      </li>
-    </ul>
-  </div>
-</div>
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 sm:p-6">
+        <ul class="list-disc list-inside space-y-3">
+          <li>
+            <a href="https://github.com/Shubham04-oss/Student-performance-regression" target="_blank" class="hover:underline text-white">Student Performance Regression</a>
+          </li>
+          <li>
+            <a href="https://github.com/Shubham04-oss/Medical-Cost-Prediction" target="_blank" class="hover:underline text-white">Medical Cost Prediction</a>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div id="dlContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
-  <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6">
-    <p class="text-center text-gray-400">Coming soon...</p>
-  </div>
-</div>
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 sm:p-6">
+        <p class="text-center text-gray-400">Coming soon...</p>
+      </div>
+    </div>
     <div id="aiContent" class="overflow-hidden max-h-0 transition-all duration-700 mt-6">
-  <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6">
-    <p class="text-center text-gray-400">Coming soon...</p>
-  </div>
-</div>
+      <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4 sm:p-6">
+        <p class="text-center text-gray-400">Coming soon...</p>
+      </div>
+    </div>
   </section>
 
   <!-- Skills Section -->
-  <section class="mb-16">
-    <h2 class="text-2xl font-semibold text-center mb-6">Skills</h2>
-    <div class="flex flex-wrap justify-center gap-4">
-      <span class="skill-pill px-4 py-2 rounded-full">Python</span>
-      <span class="skill-pill px-4 py-2 rounded-full">C</span>
-      <span class="skill-pill px-4 py-2 rounded-full">EDA</span>
-      <span class="skill-pill px-4 py-2 rounded-full">Data Analysis</span>
-      <span class="skill-pill px-4 py-2 rounded-full">Excel</span>
-      <span class="skill-pill px-4 py-2 rounded-full">SQL</span>
+  <section class="mb-12 sm:mb-16" aria-labelledby="skills-heading">
+    <h2 id="skills-heading" class="text-xl sm:text-2xl font-semibold text-center mb-6">Skills</h2>
+    <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🐍</span> Python</span>
+      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🖥️</span> C</span>
+      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">📊</span> EDA</span>
+      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🔍</span> Data Analysis</span>
+      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">📈</span> Excel</span>
+      <span class="skill-pill px-3 sm:px-4 py-1 sm:py-2 rounded-full"><span class="skill-emoji">🗄️</span> SQL</span>
     </div>
   </section>
 </main>
 
 <!-- Contact Section -->
-<section id="contact" class="bg-white/10 backdrop-blur-md border-t border-white/20 py-12">
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-2xl font-semibold mb-4">📫 Get in touch</h2>
-    <div class="flex justify-center space-x-8">
-      <a href="https://github.com/Shubham04-oss" target="_blank" class="hover:text-white text-xl">GitHub</a>
-      <a href="https://linkedin.com/in/shubham-tanwar04" target="_blank" class="hover:text-white text-xl">LinkedIn</a>
-      <a href="https://instagram.com/braindead.shel" target="_blank" class="hover:text-white text-xl">Instagram</a>
+<section id="contact" class="bg-white/10 backdrop-blur-md border-t border-white/20 py-8 sm:py-12" aria-labelledby="contact-heading">
+ .Annotated Code Block
+  <div class="container mx-auto px-4 sm:px-6 text-center">
+    <h2 id="contact-heading" class="text-xl sm:text-2xl font-semibold mb-4">📫 Get in touch</h2>
+    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8">
+      <a href="https://github.com/Shubham04-oss pastbin.com" target="_blank" class="hover:text-white text-lg sm:text-xl">GitHub</a>
+      <a href="https://linkedin.com/in/shubham-tanwar04" target="_blank" class="hover:text-white text-lg sm:text-xl">LinkedIn</a>
+      <a href="https://instagram.com/braindead.shel" target="_blank" class="33hover:text-white text-lg sm:text-xl">Instagram</a>
     </div>
   </div>
 </section>
 
-<footer class="text-center text-gray-500 py-6">© 2025 Shubham</footer>
+<footer class="text-center text-gray-500 py-4 sm:py-6">© 2025 Shubham</footer>
 
 <script>
+  // Handle collapsible sections with auto expand and auto collapse
   const sections = ['mlContent', 'dlContent', 'aiContent', 'aboutContent'];
+  let collapseTimeout = null;
+  const AUTO_COLLAPSE_DELAY = 3000; // 3 seconds
+
+  function collapseSection(targetId) {
+    const el = document.getElementById(targetId);
+    const btn = document.querySelector(`[data-target="${targetId}"]`);
+    if (el && btn) {
+      el.style.maxHeight = '0px';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('active'); // Remove active class
+    }
+  }
+
+  function expandSection(targetId) {
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      const btn = document.querySelector(`[data-target="${id}"]`);
+      if (el && btn) {
+        if (id === targetId) {
+          el.style.maxHeight = el.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+          btn.classList.add('active'); // Add active class
+        } else {
+          el.style.maxHeight = '0px';
+          btn.setAttribute('aria-expanded', 'false');
+          btn.classList.remove('active'); // Remove active class
+        }
+      }
+    });
+  }
+
+  function startAutoCollapse(targetId) {
+    clearTimeout(collapseTimeout); // Clear any existing timeout
+    collapseTimeout = setTimeout(() => collapseSection(targetId), AUTO_COLLAPSE_DELAY);
+  }
+
   document.querySelectorAll('.project-btn').forEach(btn => {
     const target = btn.getAttribute('data-target');
+    const targetSection = document.getElementById(target);
+
+    // Expand on hover/touchstart
     btn.addEventListener('mouseenter', () => {
-      sections.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.style.maxHeight = id === target ? el.scrollHeight + 'px' : '0px';
-        }
-      });
+      clearTimeout(collapseTimeout);
+      expandSection(target);
+    });
+    btn.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Prevent default touch behavior
+      clearTimeout(collapseTimeout);
+      expandSection(target);
+    }, { passive: false });
+
+    // Start auto-collapse on mouseleave/touchend
+    btn.addEventListener('mouseleave', () => {
+      if (targetSection.style.maxHeight !== '0px') {
+        startAutoCollapse(target);
+      }
+    });
+    btn.addEventListener('touchend', () => {
+      if (targetSection.style.maxHeight !== '0px') {
+        startAutoCollapse(target);
+      }
+    }, { passive: true });
+
+    // Pause auto-collapse on section interaction
+    targetSection.addEventListener('mouseenter', () => clearTimeout(collapseTimeout));
+    targetSection.addEventListener('touchstart', () => clearTimeout(collapseTimeout), { passive: true });
+
+    // Click/tap to toggle section
+    btn.addEventListener('click', () => {
+      clearTimeout(collapseTimeout);
+      const isExpanded = targetSection.style.maxHeight !== '0px';
+      if (!isExpanded) {
+        expandSection(target);
+      } else {
+        collapseSection(target);
+      }
     });
   });
 
+  // Canvas animation
   const canvas = document.getElementById("cometCanvas");
   const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+
+  // Resize canvas on window resize
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  // Mouse/touch position
   let mouseX = canvas.width / 2;
   let mouseY = canvas.height / 2;
 
+  // Update position for mouse and touch
   window.addEventListener('mousemove', e => {
     mouseX = e.clientX;
     mouseY = e.clientY;
   });
+  window.addEventListener('touchmove', e => {
+    e.preventDefault(); // Prevent scrolling
+    const touch = e.touches[0];
+    mouseX = touch.clientX;
+    mouseY = touch.clientY;
+  }, { passive: false });
 
-  const stars = Array.from({ length: 300 }, () => ({
+  // Optimize star count for mobile
+  const isMobile = window.innerWidth <= 640;
+  const starCount = isMobile ? 100 : 300; // Fewer stars on mobile
+  const stars = Array.from({ length: starCount }, () => ({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     radius: Math.random() * 2,
@@ -172,10 +295,13 @@
     stars.forEach(star => {
       const dx = mouseX - star.x;
       const dy = mouseY - star.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const attraction = Math.max(0, 100 - dist) / 300;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1; // Avoid division by zero
+      const attraction = Math.max(0, 100 - dist) / (isMobile ? 600 : 300); // Weaker attraction on mobile
       star.x += star.dx + (dx / dist) * attraction;
       star.y += star.dy + (dy / dist) * attraction;
+      3// Keep stars within canvas bounds
+      star.x = Math.max(0, Math.min(canvas.width, star.x));
+      star.y = Math.max(0, Math.min(canvas.height, star.y));
       ctx.beginPath();
       ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
       ctx.fillStyle = star.color;
@@ -186,7 +312,8 @@
   }
 
   function spawnNebula() {
-    for (let i = 0; i < 30; i++) {
+    const newStarCount = isMobile ? 10 : 30; // Fewer new stars on mobile
+    for (let i = 0; i < newStarCount; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -196,6 +323,10 @@
         dy: (Math.random() - 0.5) * 0.4,
         color: 'rgba(255, 255, 255, 0.6)'
       });
+    }
+    // Limit total stars to prevent performance issues
+    if (stars.length > (isMobile ? 150 : 400)) {
+      stars.splice(0, stars.length - (isMobile ? 150 : 400));
     }
   }
 
